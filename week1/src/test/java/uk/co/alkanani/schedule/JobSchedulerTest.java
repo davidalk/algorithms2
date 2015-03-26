@@ -19,10 +19,24 @@ public class JobSchedulerTest {
         Job[] jobs = FileUtil.loadJobs("test-jobs.txt");
 
         // when
-        int sum = scheduler.getSumWeightedCompletionTimes(jobs);
+        long sum = scheduler.getSumWeightedCompletionTimes(jobs);
 
         // then
-        assertEquals(21194, sum);
+        assertEquals(21194L, sum);
+    }
+
+    @Test
+    public void jobSchedulerGetsCorrectWeightedSumForRatioComparator() {
+        // given
+        RatioJobComparator comparator = new RatioJobComparator();
+        JobScheduler scheduler = new JobScheduler(comparator);
+        Job[] jobs = FileUtil.loadJobs("test-jobs.txt");
+
+        // when
+        long sum = scheduler.getSumWeightedCompletionTimes(jobs);
+
+        // then
+        assertEquals(21179L, sum);
     }
 
 }

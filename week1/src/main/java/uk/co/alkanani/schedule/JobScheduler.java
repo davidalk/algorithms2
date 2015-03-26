@@ -12,10 +12,10 @@ public class JobScheduler {
         jobComparator = comparator;
     }
 
-    public int getSumWeightedCompletionTimes(Job[] jobs) {
+    public long getSumWeightedCompletionTimes(Job[] jobs) {
         Arrays.sort(jobs, jobComparator);
-        int sum = 0;
-        int currentCompletionTime = 0;
+        long sum = 0;
+        long currentCompletionTime = 0;
 
         for (int i=0; i<jobs.length; i++) {
             currentCompletionTime += jobs[i].getLength();
