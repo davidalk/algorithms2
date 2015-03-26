@@ -1,6 +1,6 @@
 package uk.co.alkanani.file;
 
-import uk.co.alkanani.Job;
+import uk.co.alkanani.domain.Job;
 
 import java.io.File;
 import java.io.FileNotFoundException;

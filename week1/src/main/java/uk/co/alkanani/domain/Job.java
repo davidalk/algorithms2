@@ -1,4 +1,4 @@
-package uk.co.alkanani;
+package uk.co.alkanani.domain;
 
 public class Job {
     long weight;

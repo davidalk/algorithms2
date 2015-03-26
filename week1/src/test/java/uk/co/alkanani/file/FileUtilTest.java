@@ -3,7 +3,7 @@ package uk.co.alkanani.file;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import uk.co.alkanani.Job;
+import uk.co.alkanani.domain.Job;
 
 import static org.junit.Assert.*;
 
