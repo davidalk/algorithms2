@@ -19,8 +19,8 @@ public class FileUtil {
             int lines = scanner.nextInt();
             jobs = new Job[lines];
             for (int i=0; i<lines; i++) {
-                long weight = scanner.nextLong();
-                long length = scanner.nextLong();
+                int weight = scanner.nextInt();
+                int length = scanner.nextInt();
                 Job job = new Job(weight, length);
                 jobs[i] = job;
             }

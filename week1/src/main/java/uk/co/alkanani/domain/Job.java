@@ -1,28 +1,28 @@
 package uk.co.alkanani.domain;
 
 public class Job {
-    long weight;
+    int weight;
 
-    long length;
+    int length;
 
-    public Job(long weight, long length) {
+    public Job(int weight, int length) {
         this.weight = weight;
         this.length = length;
     }
 
-    public long getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(long weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
-    public long getLength() {
+    public int getLength() {
         return length;
     }
 
-    public void setLength(long length) {
+    public void setLength(int length) {
         this.length = length;
     }
 
@@ -40,8 +40,8 @@ public class Job {
 
     @Override
     public int hashCode() {
-        int result = (int) (weight ^ (weight >>> 32));
-        result = 31 * result + (int) (length ^ (length >>> 32));
+        int result = weight;
+        result = 31 * result + length;
         return result;
     }
 }
