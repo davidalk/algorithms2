@@ -3,8 +3,6 @@ package uk.co.alkanani.file;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import uk.co.alkanani.domain.Edge;
-import uk.co.alkanani.domain.Graph;
 import uk.co.alkanani.domain.Job;
 
 import static org.junit.Assert.*;
@@ -34,19 +32,18 @@ public class FileUtilTest {
     @Test
     public void loadEdgesLoadsTestFileCorrectly() {
         // given
-        Edge edge1 = new Edge(1, 2, 4);
-        Edge edge2 = new Edge(2, 3, 1);
-        Edge edge3 = new Edge(3, 4, 2);
-        Edge edge4 = new Edge(4, 1, 5);
-        Edge edge5 = new Edge(2, 4, 3);
-        Edge[] edges = {edge1, edge2, edge3, edge4, edge5};
-        Graph graph = new Graph(4, edges);
+        long[][] matrix = new long[5][5];
+        matrix[1][2] = 4;
+        matrix[2][3] = 1;
+        matrix[3][4] = 2;
+        matrix[4][1] = 5;
+        matrix[2][4] = 3;
 
         // when
-        Graph result = FileUtil.loadEdges("test-edges.txt");
+        long[][] result = FileUtil.loadEdges("test-edges.txt");
 
         // then
-        assertEquals(graph, result);
+        assertArrayEquals(matrix, result);
     }
 
 }

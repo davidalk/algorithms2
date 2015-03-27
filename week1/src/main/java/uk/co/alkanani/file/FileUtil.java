@@ -1,6 +1,5 @@
 package uk.co.alkanani.file;
 
-import uk.co.alkanani.domain.Edge;
 import uk.co.alkanani.domain.Graph;
 import uk.co.alkanani.domain.Job;
 
@@ -38,24 +37,22 @@ public class FileUtil {
         return jobs;
     }
 
-    public static Graph loadEdges(String filename) {
+    public static long[][] loadEdges(String filename) {
         File file = new File(FileUtil.class.getClassLoader().getResource(filename).getFile());
-        Graph graph = new Graph();
-
+        long[][] matrix = null;
         Scanner scanner = null;
         try {
             scanner = new Scanner(file);
             int nodes = scanner.nextInt();
             int edgeCount = scanner.nextInt();
-            Edge[] edges = new Edge[edgeCount];
+            matrix = new long[nodes+1][nodes+1];
 
             for (int i=0; i<edgeCount; i++) {
-                Edge edge = new Edge(scanner.nextInt(), scanner.nextInt(), scanner.nextLong());
-                edges[i] = edge;
+                int start = scanner.nextInt();
+                int end =  scanner.nextInt();
+                long cost = scanner.nextLong();
+                matrix[start][end] = cost;
             }
-
-            graph.setNodes(nodes);
-            graph.setEdges(edges);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -66,7 +63,7 @@ public class FileUtil {
             }
         }
 
-        return graph;
+        return matrix;
     }
 
 }
