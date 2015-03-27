@@ -1,6 +1,5 @@
 package uk.co.alkanani.file;
 
-import uk.co.alkanani.domain.Graph;
 import uk.co.alkanani.domain.Job;
 
 import java.io.File;
