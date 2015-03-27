@@ -30,11 +30,11 @@ public class MinimumSpanningTree {
             while (!found) {
                 if ( nodesInSpanningTree.contains( edges[i].getStart()) && !nodesInSpanningTree.contains(edges[i].getEnd()) ) {
                     spanningTree.add(edges[i]);
-                    nodesInSpanningTree.add(edges[i].getStart());
+                    nodesInSpanningTree.add(edges[i].getEnd());
                     found = true;
                 } else if ( nodesInSpanningTree.contains( edges[i].getEnd()) && !nodesInSpanningTree.contains(edges[i].getStart()) ) {
                     spanningTree.add(edges[i]);
-                    nodesInSpanningTree.add(edges[i].getEnd());
+                    nodesInSpanningTree.add(edges[i].getStart());
                     found = true;
                 }
                 i++;
