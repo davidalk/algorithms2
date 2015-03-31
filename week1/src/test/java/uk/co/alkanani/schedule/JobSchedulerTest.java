@@ -1,5 +1,6 @@
 package uk.co.alkanani.schedule;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -10,16 +11,20 @@ import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
 public class JobSchedulerTest {
+    private JobScheduler scheduler;
+
+    @Before
+    public void setUp() {
+        scheduler = new JobScheduler(new RatioJobComparator(), new DifferenceJobComparator());
+    }
 
     @Test
     public void jobSchedulerGetsCorrectWeightedSumForDifferenceComparator() {
         // given
-        DifferenceJobComparator comparator = new DifferenceJobComparator();
-        JobScheduler scheduler = new JobScheduler(comparator);
         Job[] jobs = FileUtil.loadJobs("test-jobs.txt");
 
         // when
-        long sum = scheduler.getSumWeightedCompletionTimes(jobs);
+        long sum = scheduler.getDifferenceComparedCompletionTimes(jobs);
 
         // then
         assertEquals(21194L, sum);
@@ -28,12 +33,10 @@ public class JobSchedulerTest {
     @Test
     public void jobSchedulerGetsCorrectWeightedSumForRatioComparator() {
         // given
-        RatioJobComparator comparator = new RatioJobComparator();
-        JobScheduler scheduler = new JobScheduler(comparator);
         Job[] jobs = FileUtil.loadJobs("test-jobs.txt");
 
         // when
-        long sum = scheduler.getSumWeightedCompletionTimes(jobs);
+        long sum = scheduler.getRatioComparedCompletionTimes(jobs);
 
         // then
         assertEquals(21179L, sum);
