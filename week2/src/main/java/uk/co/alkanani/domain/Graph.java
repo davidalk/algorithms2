@@ -1,12 +1,14 @@
 package uk.co.alkanani.domain;
 
+import com.google.common.collect.ImmutableList;
+
 import java.util.List;
 
 public class Graph {
     public final int nodeCount;
     public final List<Edge> edges;
 
-    public Graph(int nodeCount, List<Edge> edges) {
+    public Graph(int nodeCount, ImmutableList<Edge> edges) {
         this.nodeCount = nodeCount;
         this.edges = edges;
     }

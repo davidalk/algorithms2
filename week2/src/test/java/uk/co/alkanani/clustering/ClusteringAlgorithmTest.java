@@ -1,5 +1,6 @@
 package uk.co.alkanani.clustering;
 
+import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -42,7 +43,7 @@ public class ClusteringAlgorithmTest {
         Edge edge2 = new Edge(2, 3, 2);
         Edge edge3 = new Edge(3, 4, 15);
         Edge edge4 = new Edge(4, 5, 7);
-        List<Edge> edges = Arrays.asList(edge1, edge2, edge3, edge4);
+        ImmutableList<Edge> edges = new ImmutableList.Builder<Edge>().add(edge1, edge2, edge3, edge4).build();
         Graph graph = new Graph(5, edges);
 
         List<Edge> expected = Arrays.asList(edge2, edge4, edge1, edge3);

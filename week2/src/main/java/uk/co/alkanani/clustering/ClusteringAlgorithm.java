@@ -49,7 +49,7 @@ public class ClusteringAlgorithm {
     }
 
     List<Edge> getSortedEdges() {
-        List<Edge> edges = graph.edges;
+        List<Edge> edges = new ArrayList<>(graph.edges);
 
         Collections.sort(edges, (e1, e2) -> {
             long diff = e1.weight - e2.weight;

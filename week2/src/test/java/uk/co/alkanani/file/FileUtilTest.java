@@ -1,5 +1,6 @@
 package uk.co.alkanani.file;
 
+import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -32,9 +33,10 @@ public class FileUtilTest {
         Edge edge12 = new Edge(7, 9, 6);
         Edge edge13 = new Edge(7, 8, 1);
         Edge edge14 = new Edge(8, 9, 7);
-        List<Edge> edges =
-                Arrays.asList(edge1, edge2, edge3, edge4, edge5, edge6, edge7,
-                        edge8, edge9, edge10, edge11, edge12, edge13, edge14);
+
+        ImmutableList<Edge> edges = new ImmutableList.Builder<Edge>()
+                .add(edge1, edge2, edge3, edge4, edge5, edge6, edge7,
+                        edge8, edge9, edge10, edge11, edge12, edge13, edge14).build();
         Graph expected = new Graph(9, edges);
 
         // when

@@ -1,5 +1,6 @@
 package uk.co.alkanani.file;
 
+import com.google.common.collect.ImmutableList;
 import uk.co.alkanani.bigcluster.BigNodeContainer;
 import uk.co.alkanani.domain.Edge;
 import uk.co.alkanani.domain.Graph;
@@ -14,7 +15,7 @@ public class FileUtil {
 
     public static Graph loadGraph(String filename) {
         File file = getFile(filename);
-        List<Edge> edges = new ArrayList<>();
+        ImmutableList.Builder<Edge> edges = new ImmutableList.Builder<>();
         int nodeCount = 0;
 
         Scanner scanner = null;
@@ -38,7 +39,7 @@ public class FileUtil {
             }
         }
 
-        return new Graph(nodeCount, edges);
+        return new Graph(nodeCount, edges.build());
     }
 
     public static BigNodeContainer loadBigNodeContainer(String filename) {
