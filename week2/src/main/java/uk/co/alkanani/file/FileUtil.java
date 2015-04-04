@@ -5,6 +5,7 @@ import uk.co.alkanani.domain.Graph;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,7 +13,14 @@ import java.util.Scanner;
 public class FileUtil {
 
     public static Graph loadEdges(String filename) {
-        File file = new File(FileUtil.class.getClassLoader().getResource(filename).getFile());
+        URL url = FileUtil.class.getClassLoader().getResource(filename);
+        File file;
+        if (url.getFile() != null) {
+            file = new File(url.getFile());
+        } else {
+            throw new IllegalArgumentException("Invalid file");
+        }
+
         List<Edge> edges = new ArrayList<>();
         int nodeCount = 0;
 
