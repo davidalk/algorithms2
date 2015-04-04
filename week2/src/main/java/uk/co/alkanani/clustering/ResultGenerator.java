@@ -9,7 +9,7 @@ import java.util.Set;
 public class ResultGenerator {
 
     public static void main(String... args) {
-        Graph graph = FileUtil.loadEdges("clustering1.txt");
+        Graph graph = FileUtil.loadGraph("clustering1.txt");
         ClusteringAlgorithm algorithm = new ClusteringAlgorithm(graph);
         Set<Edge> result = algorithm.execute(4);
 

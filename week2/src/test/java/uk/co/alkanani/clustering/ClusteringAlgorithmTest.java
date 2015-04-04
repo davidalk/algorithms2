@@ -25,7 +25,7 @@ public class ClusteringAlgorithmTest {
         Set<Edge> expected = new HashSet<>();
         expected.add(edge1);
         expected.add(edge2);
-        Graph graph = FileUtil.loadEdges("clustering-test.txt");
+        Graph graph = FileUtil.loadGraph("clustering-test.txt");
 
         // when
         ClusteringAlgorithm algorithm = new ClusteringAlgorithm(graph);

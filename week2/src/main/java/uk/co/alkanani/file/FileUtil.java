@@ -1,26 +1,19 @@
 package uk.co.alkanani.file;
 
+import uk.co.alkanani.bigcluster.BigNodeContainer;
 import uk.co.alkanani.domain.Edge;
 import uk.co.alkanani.domain.Graph;
+import uk.co.alkanani.domain.Node;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class FileUtil {
 
-    public static Graph loadEdges(String filename) {
-        URL url = FileUtil.class.getClassLoader().getResource(filename);
-        File file;
-        if (url.getFile() != null) {
-            file = new File(url.getFile());
-        } else {
-            throw new IllegalArgumentException("Invalid file");
-        }
-
+    public static Graph loadGraph(String filename) {
+        File file = getFile(filename);
         List<Edge> edges = new ArrayList<>();
         int nodeCount = 0;
 
@@ -46,5 +39,54 @@ public class FileUtil {
         }
 
         return new Graph(nodeCount, edges);
+    }
+
+    public static BigNodeContainer loadBigNodeContainer(String filename) {
+        File file = getFile(filename);
+        int nodeCount;
+        int bitSize;
+        Map<Integer, Set<Node>> nodeMap = new HashMap<>();
+
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(file);
+            nodeCount = scanner.nextInt();
+            bitSize = scanner.nextInt();
+            for (int i=0; i<nodeCount; i++) {
+                StringBuilder sb = new StringBuilder();
+                for (int j=0; j<bitSize; j++) {
+                    sb.append(scanner.nextInt());
+                }
+                int key = Integer.parseInt(sb.toString(), 2);
+                if (nodeMap.containsKey(key)) {
+                    nodeMap.get(key).add(new Node(i+1));
+                } else {
+                    Set<Node> nodeSet = new HashSet<>();
+                    nodeSet.add(new Node(i+1));
+                    nodeMap.put(key, nodeSet);
+                }
+
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            if (scanner != null) {
+                scanner.close();
+            }
+        }
+        return new BigNodeContainer(nodeCount, bitSize, nodeMap);
+    }
+
+    private static File getFile(String filename) {
+        URL url = FileUtil.class.getClassLoader().getResource(filename);
+        File file;
+        if (url != null) {
+            file = new File(url.getFile());
+        } else {
+            throw new IllegalArgumentException("Invalid file");
+        }
+        return file;
     }
 }

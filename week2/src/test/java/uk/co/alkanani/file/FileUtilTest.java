@@ -3,11 +3,12 @@ package uk.co.alkanani.file;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import uk.co.alkanani.bigcluster.BigNodeContainer;
 import uk.co.alkanani.domain.Edge;
 import uk.co.alkanani.domain.Graph;
+import uk.co.alkanani.domain.Node;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -15,7 +16,7 @@ import static org.junit.Assert.*;
 public class FileUtilTest {
 
     @Test
-    public void loadEdgesReturnsCorrectList() {
+    public void loadGraphReturnsCorrectGraph() {
         // given
         Edge edge1 = new Edge(1, 2, 4);
         Edge edge2 = new Edge(1, 8, 8);
@@ -37,7 +38,35 @@ public class FileUtilTest {
         Graph expected = new Graph(9, edges);
 
         // when
-        Graph result = FileUtil.loadEdges("clustering-test.txt");
+        Graph result = FileUtil.loadGraph("clustering-test.txt");
+
+        // then
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void loadNodeMapReturnsCorrectContainer() {
+        // given
+        Map<Integer, Set<Node>> nodeMap = new HashMap<>();
+        nodeMap.put(0, new HashSet<>(Collections.singleton(new Node(1))));
+        nodeMap.put(1, new HashSet<>(Collections.singleton(new Node(2))));
+        nodeMap.put(2, new HashSet<>(Collections.singleton(new Node(3))));
+        nodeMap.put(3, new HashSet<>(Collections.singleton(new Node(4))));
+        nodeMap.put(4, new HashSet<>(Collections.singleton(new Node(5))));
+        nodeMap.put(5, new HashSet<>(Collections.singleton(new Node(6))));
+        nodeMap.put(6, new HashSet<>(Collections.singleton(new Node(7))));
+        nodeMap.put(7, new HashSet<>(Collections.singleton(new Node(8))));
+        nodeMap.put(8, new HashSet<>(Collections.singleton(new Node(9))));
+        nodeMap.put(9, new HashSet<>(Collections.singleton(new Node(10))));
+        nodeMap.get(0).add(new Node(11));
+        nodeMap.get(1).add(new Node(12));
+        nodeMap.get(2).add(new Node(13));
+        nodeMap.get(0).add(new Node(14));
+
+        BigNodeContainer expected = new BigNodeContainer(14, 4, nodeMap);
+
+        // when
+        BigNodeContainer result = FileUtil.loadBigNodeContainer("clustering-big-test.txt");
 
         // then
         assertEquals(expected, result);
