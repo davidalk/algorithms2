@@ -18,16 +18,13 @@ public class ClusteringAlgorithm {
         int clusterCount = graph.nodeCount;
         List<Edge> sortedEdges = getSortedEdges();
 
-
         Iterator<Edge> edgeIterator = sortedEdges.iterator();
-
         while (clusterCount > targetClusters) {
             Edge edge = edgeIterator.next();
             if (nodes[edge.a].findSet() != nodes[edge.b].findSet()) {
                 nodes[edge.a].union(nodes[edge.b]);
                 clusterCount--;
             }
-            edgeIterator.remove();
         }
 
         Collections.reverse(sortedEdges);
