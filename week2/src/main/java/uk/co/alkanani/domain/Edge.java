@@ -31,4 +31,13 @@ public class Edge {
         result = 31 * result + (int) (weight ^ (weight >>> 32));
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Edge{" +
+                "a=" + a +
+                ", b=" + b +
+                ", weight=" + weight +
+                '}';
+    }
 }
