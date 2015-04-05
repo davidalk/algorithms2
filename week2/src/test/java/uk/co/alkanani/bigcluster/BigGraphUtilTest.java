@@ -13,17 +13,16 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
 @RunWith(JUnit4.class)
-public class BigGraphBuilderTest {
+public class BigGraphUtilTest {
 
     @Test
     public void bitMaskGeneratedCorrectly() {
         // given
         Set<Integer> expectedOneBit = new HashSet<>(Arrays.asList(1, 2, 4, 8));
-        Set<Integer> expectedTwoBit = new HashSet<>(Arrays.asList(3, 5 ,9, 6, 10, 12));
+        Set<Integer> expectedTwoBit = new HashSet<>(Arrays.asList(3, 5, 9, 6, 10, 12));
 
         // when
-        BigGraphBuilder graphBuilder = new BigGraphBuilder(mock(BigNodeContainer.class));
-        List<Set<Integer>> result = graphBuilder.generateBitMasks(4);
+        List<Set<Integer>> result = BigGraphUtil.generateBitMasks(4);
 
         // then
         assertEquals(expectedOneBit, result.get(0));

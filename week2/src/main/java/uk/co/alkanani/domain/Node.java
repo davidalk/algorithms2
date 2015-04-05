@@ -25,12 +25,14 @@ public class Node implements UnionFindSet {
     }
 
     private void link(Node x, Node y) {
-        if (x.rank > y.rank) {
-            y.parent = x;
-        } else {
-            x.parent = y.parent;
-            if (x.rank == y.rank) {
-                y.rank++;
+        if (!x.equals(y)) {
+            if (x.rank > y.rank) {
+                y.parent = x;
+            } else {
+                x.parent = y.parent;
+                if (x.rank == y.rank) {
+                    y.rank++;
+                }
             }
         }
     }
