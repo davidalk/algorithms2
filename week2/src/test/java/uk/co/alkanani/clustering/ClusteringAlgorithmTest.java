@@ -21,16 +21,17 @@ public class ClusteringAlgorithmTest {
     @Test
     public void clusteringAlgorithmGeneratesCorrectMaximumEdgeSet() {
         // given
-        Edge edge1 = new Edge(5, 6, 10);
-        Edge edge2 = new Edge(2, 8, 11);
-        Set<Edge> expected = new HashSet<>();
-        expected.add(edge1);
-        expected.add(edge2);
+        int expected = 8 + 9;
         Graph graph = FileUtil.loadGraph("clustering-test.txt");
 
         // when
         ClusteringAlgorithm algorithm = new ClusteringAlgorithm(graph);
-        Set<Edge> result = algorithm.execute(3);
+        Set<Edge> edgeResult = algorithm.execute(3);
+        int result = 0;
+        for (Edge edge : edgeResult) {
+            result += edge.weight;
+        }
+
 
         // then
         assertEquals(expected, result);

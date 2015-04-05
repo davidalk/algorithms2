@@ -27,12 +27,11 @@ public class ClusteringAlgorithm {
             }
         }
 
-        Collections.reverse(sortedEdges);
         Set<Edge> resultSet = new HashSet<>();
-        Iterator<Edge> reverseEdgeIterator = sortedEdges.iterator();
         while (resultSet.size() < targetClusters - 1) {
-            Edge edge = reverseEdgeIterator.next();
+            Edge edge = edgeIterator.next();
             if (nodes[edge.a].findSet() != nodes[edge.b].findSet()) {
+                nodes[edge.a].union(nodes[edge.b]);
                 resultSet.add(edge);
             }
         }

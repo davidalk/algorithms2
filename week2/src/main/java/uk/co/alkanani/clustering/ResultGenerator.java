@@ -13,12 +13,15 @@ public class ResultGenerator {
         ClusteringAlgorithm algorithm = new ClusteringAlgorithm(graph);
         Set<Edge> result = algorithm.execute(4);
 
-        long maximumSpacing = 0L;
+        long maximumSpacing = Long.MAX_VALUE;
         System.out.println("Edges are:");
         for (Edge edge : result) {
             System.out.println(edge);
-            maximumSpacing += edge.weight;
+            if (edge.weight < maximumSpacing) {
+                maximumSpacing = edge.weight;
+            }
         }
+
         System.out.println("Maximum spacing is " + maximumSpacing);
 
     }
