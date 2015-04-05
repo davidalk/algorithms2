@@ -6,6 +6,7 @@ import org.junit.runners.JUnit4;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -17,15 +18,16 @@ public class BigGraphBuilderTest {
     @Test
     public void bitMaskGeneratedCorrectly() {
         // given
-        Set<Integer> expected = new HashSet<>(Arrays.asList(1, 2, 4, 8));
-        expected.addAll(Arrays.asList(3, 5 ,9, 6, 10, 12));
+        Set<Integer> expectedOneBit = new HashSet<>(Arrays.asList(1, 2, 4, 8));
+        Set<Integer> expectedTwoBit = new HashSet<>(Arrays.asList(3, 5 ,9, 6, 10, 12));
 
         // when
         BigGraphBuilder graphBuilder = new BigGraphBuilder(mock(BigNodeContainer.class));
-        Set<Integer> result = graphBuilder.generateBitMasks(4);
+        List<Set<Integer>> result = graphBuilder.generateBitMasks(4);
 
         // then
-        assertEquals(expected, result);
+        assertEquals(expectedOneBit, result.get(0));
+        assertEquals(expectedTwoBit, result.get(1));
     }
 
 }
