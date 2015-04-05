@@ -3,6 +3,7 @@ package uk.co.alkanani.bigcluster;
 import com.google.common.collect.ImmutableList;
 import uk.co.alkanani.domain.Edge;
 import uk.co.alkanani.domain.Graph;
+import uk.co.alkanani.domain.Node;
 
 import java.util.*;
 
@@ -16,9 +17,42 @@ public class BigGraphBuilder {
     public Graph buildGraph() {
         List<Set<Integer>> bitMasks = generateBitMasks(bigNodeContainer.bitSize);
         int nodeCount = bigNodeContainer.nodeCount;
+        Map<Integer, Set<Node>> nodeMap = bigNodeContainer.nodeMap;
         ImmutableList.Builder<Edge> edgeBuilder = new ImmutableList.Builder<>();
 
+        for (Integer integer : nodeMap.keySet()) {
+            Set<Node> sourceNodes = nodeMap.get(integer);
 
+            // one bit xor check
+            for (Integer mask : bitMasks.get(0)) {
+                int xorVal = integer ^ mask;
+                if (nodeMap.containsKey(xorVal)) {
+                    for (Node targetNode : nodeMap.get(xorVal)) {
+                        for (Node sourceNode : sourceNodes) {
+                            Edge edge = new Edge(sourceNode.nodeId, targetNode.nodeId, 1);
+                            edgeBuilder.add(edge);
+                        }
+
+                    }
+                }
+            }
+
+            // two bit xor check
+            for (Integer mask : bitMasks.get(1)) {
+                int xorVal = integer ^ mask;
+                if (nodeMap.containsKey(xorVal)) {
+                    for (Node targetNode : nodeMap.get(xorVal)) {
+                        for (Node sourceNode : sourceNodes) {
+                            Edge edge = new Edge(sourceNode.nodeId, targetNode.nodeId, 2);
+                            edgeBuilder.add(edge);
+                        }
+
+                    }
+
+                }
+            }
+
+        }
 
         return new Graph(nodeCount, edgeBuilder.build());
     }
