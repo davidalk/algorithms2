@@ -8,14 +8,15 @@ import java.util.*;
 
 public class ClusteringAlgorithm {
     private final Graph graph;
+    private int clusterCount;
 
     public ClusteringAlgorithm(Graph graph) {
         this.graph = graph;
+        this.clusterCount = graph.nodeCount;
     }
 
     public Set<Edge> execute(int targetClusters) {
         Node[] nodes = initialiseNodes();
-        int clusterCount = graph.nodeCount;
         List<Edge> sortedEdges = getSortedEdges();
 
         Iterator<Edge> edgeIterator = sortedEdges.iterator();
@@ -49,18 +50,7 @@ public class ClusteringAlgorithm {
 
     List<Edge> getSortedEdges() {
         List<Edge> edges = new ArrayList<>(graph.edges);
-
-        Collections.sort(edges, (e1, e2) -> {
-            long diff = e1.weight - e2.weight;
-            if (diff == 0) {
-                return 0;
-            } else if (diff > 0) {
-                return 1;
-            } else {
-                return -1;
-            }
-        });
-
+        Collections.sort(edges, (e1, e2) -> Long.compare(e1.weight, e2.weight));
         return edges;
     }
 }
