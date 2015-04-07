@@ -21,19 +21,17 @@ public class BigClusteringAlgorithm {
         List<Set<Integer>> bitMasks = BigGraphUtil.generateBitMasks(bigNodeContainer.bitSize);
 
         // union all zero distance edges
-        for (Set<Node> nodeSet : nodeMap.values()) {
+        nodeMap.values().forEach((nodeSet) -> {
             if (nodeSet.size() > 1) {
-                Iterator<Node> nodeIterator = nodeSet.iterator();
-                Node first = nodeIterator.next();
-                while (nodeIterator.hasNext()) {
-                    Node node = nodeIterator.next();
+                Node first = nodeSet.iterator().next();
+                nodeSet.forEach((node) -> {
                     if (first.findSet() != node.findSet()) {
                         first.union(node);
                         clusters--;
                     }
-                }
+                });
             }
-        }
+        });
 
         // join all one distance clusters
         for (Integer mask : bitMasks.get(0)) {
