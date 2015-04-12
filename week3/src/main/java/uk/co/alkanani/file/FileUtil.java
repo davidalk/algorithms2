@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class FileUtil {
 
     public static Knapsack loadKnapsack(String filename) {
-        File file = getFile(filename);
+        File file = CommonFileUtil.getFile(filename);
         int knapsackSize;
         int itemCount;
         Item[] items;

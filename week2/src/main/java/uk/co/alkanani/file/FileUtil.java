@@ -14,7 +14,7 @@ import java.util.*;
 public class FileUtil {
 
     public static Graph loadGraph(String filename) {
-        File file = getFile(filename);
+        File file = CommonFileUtil.getFile(filename);
         ImmutableList.Builder<Edge> edges = new ImmutableList.Builder<>();
         int nodeCount = 0;
 
@@ -43,7 +43,7 @@ public class FileUtil {
     }
 
     public static BigNodeContainer loadBigNodeContainer(String filename) {
-        File file = getFile(filename);
+        File file = CommonFileUtil.getFile(filename);
         int nodeCount;
         int bitSize;
         Map<Integer, Set<Node>> nodeMap = new HashMap<>();
@@ -80,14 +80,4 @@ public class FileUtil {
         return new BigNodeContainer(nodeCount, bitSize, nodeMap);
     }
 
-    private static File getFile(String filename) {
-        URL url = FileUtil.class.getClassLoader().getResource(filename);
-        File file;
-        if (url != null) {
-            file = new File(url.getFile());
-        } else {
-            throw new IllegalArgumentException("Invalid file");
-        }
-        return file;
-    }
 }

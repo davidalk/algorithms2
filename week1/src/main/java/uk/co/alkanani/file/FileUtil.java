@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class FileUtil {
 
     public static Job[] loadJobs(String filename) {
-        File file = new File(FileUtil.class.getClassLoader().getResource(filename).getFile());
+        File file = CommonFileUtil.getFile(filename);
 
         Job[] jobs = null;
 
@@ -39,7 +39,7 @@ public class FileUtil {
     }
 
     public static Graph loadEdges(String filename) {
-        File file = new File(FileUtil.class.getClassLoader().getResource(filename).getFile());
+        File file = CommonFileUtil.getFile(filename);
         Graph graph = new Graph();
 
         Scanner scanner = null;
