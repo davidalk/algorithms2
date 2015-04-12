@@ -12,7 +12,7 @@ public class FileUtil {
 
     public static Knapsack loadKnapsack(String filename) {
         File file = getFile(filename);
-        long knapsackSize;
+        int knapsackSize;
         int itemCount;
         Item[] items;
 
@@ -20,14 +20,14 @@ public class FileUtil {
 
         try {
             scanner = new Scanner(file);
-            knapsackSize = scanner.nextLong();
+            knapsackSize = scanner.nextInt();
             itemCount = scanner.nextInt();
             items = new Item[itemCount];
 
             int i = 0;
             while (scanner.hasNext()) {
                 long value = scanner.nextLong();
-                long weight = scanner.nextLong();
+                int weight = scanner.nextInt();
                 Item item = new Item(value, weight);
                 items[i] = item;
                 i++;

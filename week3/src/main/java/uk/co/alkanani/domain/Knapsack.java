@@ -3,13 +3,13 @@ package uk.co.alkanani.domain;
 import java.util.Arrays;
 
 public class Knapsack {
-    public final long size;
+    public final int size;
 
     public final int itemCount;
 
     public final Item[] items;
 
-    public Knapsack(long size, int itemCount, Item[] items) {
+    public Knapsack(int size, int itemCount, Item[] items) {
         this.size = size;
         this.itemCount = itemCount;
         this.items = items;
@@ -30,9 +30,9 @@ public class Knapsack {
 
     @Override
     public int hashCode() {
-        int result = (int) (size ^ (size >>> 32));
+        int result = size;
         result = 31 * result + itemCount;
-        result = 31 * result + (items != null ? Arrays.hashCode(items) : 0);
+        result = 31 * result + Arrays.hashCode(items);
         return result;
     }
 }
