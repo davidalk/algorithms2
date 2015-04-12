@@ -13,7 +13,7 @@ public class ResultGenerator {
 
         Knapsack largeKnapsack = FileUtil.loadKnapsack("knapsack_big.txt");
         KnapsackAlgorithm largeAlgorithm = new KnapsackAlgorithm(largeKnapsack);
-        long optimalLarge = largeAlgorithm.calculateOptimalValue();
+        long optimalLarge = largeAlgorithm.calculateOptimalValueForLargeKnapsack();
         System.out.println("Optimal small value " + optimalLarge);
 
     }

@@ -21,4 +21,17 @@ public class KnapsackAlgorithmTest {
         assertEquals(8L, result);
     }
 
+    @Test
+    public void largeAlgorithmReturnsOptimalValue() {
+        // given
+        Knapsack knapsack = FileUtil.loadKnapsack("knapsack-test.txt");
+
+        // when
+        KnapsackAlgorithm algorithm = new KnapsackAlgorithm(knapsack);
+        long result = algorithm.calculateOptimalValueForLargeKnapsack();
+
+        // then
+        assertEquals(8L, result);
+    }
+
 }
