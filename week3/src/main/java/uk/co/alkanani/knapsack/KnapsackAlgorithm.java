@@ -23,9 +23,9 @@ public class KnapsackAlgorithm {
                 long val1 = table[i-1][x];
                 long val2 = 0;
 
-                int offset = x - items[1].weight;
+                int offset = x - items[i-1].weight;
                 if (offset >= 0) {
-                    val2 = table[i-1][offset] + items[i].value;
+                    val2 = table[i-1][offset] + items[i-1].value;
                 }
 
                 if (val1 > val2) {
