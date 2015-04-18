@@ -22,7 +22,10 @@ public class FloydWarshallAlgorithm {
             for (int i=1; i<=graph.nodeCount; i++) {
                 for (int j=1; j<=graph.nodeCount; j++) {
                     long caseOne = resultArray[i][j][k-1];
-                    long caseTwo = resultArray[i][k][k-1] + resultArray[k][j][k-1];
+                    long caseTwo = Long.MAX_VALUE;
+                    if (resultArray[i][k][k-1] != Long.MAX_VALUE && resultArray[k][j][k-1] != Long.MAX_VALUE) {
+                        caseTwo = resultArray[i][k][k-1] + resultArray[k][j][k-1];
+                    }
 
                     resultArray[i][j][k] = caseOne < caseTwo ? caseOne : caseTwo;
 
@@ -33,12 +36,12 @@ public class FloydWarshallAlgorithm {
                 }
             }
         }
-        return null;
+        return new FloydWarshallResult(shortestPath, resultArray, graph);
     }
 
     private void initialiseResultArray(long resultArray[][][]) {
-        for (int i=0; i<=graph.nodeCount; i++) {
-            for (int j=0; j<=graph.nodeCount; j++) {
+        for (int i=1; i<=graph.nodeCount; i++) {
+            for (int j=1; j<=graph.nodeCount; j++) {
                 if (i==j) {
                    resultArray[i][j][0] = 0;
                 } else if (edges[i][j] != null) {
