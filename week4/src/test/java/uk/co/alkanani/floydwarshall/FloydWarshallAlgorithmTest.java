@@ -26,4 +26,17 @@ public class FloydWarshallAlgorithmTest {
         assertFalse(result.containsNegativeCycle);
     }
 
+    @Test
+    public void negativeCycleIdentifiedCorrectly() {
+        // given
+        Graph graph = FileUtil.loadGraph("g2-test.txt");
+
+        // when
+        FloydWarshallAlgorithm algorithm = new FloydWarshallAlgorithm(graph);
+        FloydWarshallResult result = algorithm.execute();
+
+        // then
+        assertTrue(result.containsNegativeCycle);
+    }
+
 }
