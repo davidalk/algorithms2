@@ -44,14 +44,4 @@ public class FileUtil {
         return new Knapsack(knapsackSize, itemCount, items);
     }
 
-    private static File getFile(String filename) {
-        URL url = FileUtil.class.getClassLoader().getResource(filename);
-        File file;
-        if (url != null) {
-            file = new File(url.getFile());
-        } else {
-            throw new IllegalArgumentException("Invalid file");
-        }
-        return file;
-    }
 }
