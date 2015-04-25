@@ -11,5 +11,14 @@
 
     <artifactId>week5</artifactId>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>uk.co.alkanani</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+    </dependencies>
 
 </project>
