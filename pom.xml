@@ -13,6 +13,7 @@
         <module>week3</module>
         <module>common</module>
         <module>week4</module>
+        <module>week5</module>
     </modules>
     <packaging>pom</packaging>
 
