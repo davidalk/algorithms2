@@ -27,4 +27,13 @@ public class Coordinate {
         result = 31 * result + (y != +0.0f ? Float.floatToIntBits(y) : 0);
         return result;
     }
+
+    public float getEuclideanDistance(Coordinate other) {
+        double x = (double) this.x;
+        double y = (double) this.y;
+        double otherX = (double) other.x;
+        double otherY = (double) other.y;
+        double answer = Math.sqrt(Math.pow(x - otherX, 2) + Math.pow(y - otherY, 2));
+        return (float) answer;
+    }
 }
