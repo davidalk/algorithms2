@@ -5,6 +5,7 @@ import uk.co.alkanani.domain.Coordinate;
 import java.util.BitSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class TspAlgorithm {
     private final Coordinate[] coordinates;
@@ -23,6 +24,7 @@ public class TspAlgorithm {
 
         for (int m = 2; m <= n; m++) {
             Set<Set<Integer>> subSets = BinarySetUtil.getSubSets(mainBitSet, m);
+            subSets = subSets.stream().filter(s -> s.contains(0)).collect(Collectors.toSet());
             for (Set<Integer> subSet : subSets) {
                 BitSet subSetBitSet = BitSet.valueOf(setIntToArrayLong(subSet));
                 for (Integer j : subSet) {
@@ -48,7 +50,7 @@ public class TspAlgorithm {
 
         float answer = Float.MAX_VALUE;
         for (int j=2; j<n; j++) {
-            float test = result[mainBitSet -1][j] + coordinates[j-1].getEuclideanDistance(coordinates[0]);
+            float test = result[mainBitSet][j] + coordinates[j-1].getEuclideanDistance(coordinates[0]);
             if (test < answer) {
                 answer = test;
             }
@@ -57,7 +59,7 @@ public class TspAlgorithm {
     }
 
     private void initialiseResults() {
-        result = new float[mainBitSet][n];
+        result = new float[mainBitSet+1][n];
         result[1][0] = 0;
         for (int i = 1; i < mainBitSet; i++) {
             result[i][0] = Float.MAX_VALUE;
