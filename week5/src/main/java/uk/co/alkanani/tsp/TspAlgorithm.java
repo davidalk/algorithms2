@@ -49,9 +49,16 @@ public class TspAlgorithm {
                     }
                 });
             });
-
         }
-        return 0;
+
+        float answer = Float.MAX_VALUE;
+        for (int j=2; j<=n; j++) {
+            float test = result[bitSetWithoutOne-1][j] + coordinates[j-1].getEuclideanDistance(coordinates[0]);
+            if (test < answer) {
+                answer = test;
+            }
+        }
+        return answer;
     }
 
     private void initialiseResults() {
