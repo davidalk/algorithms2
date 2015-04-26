@@ -20,8 +20,11 @@ public class BinarySetUtil {
         return (int) b.toLongArray()[0];
     }
 
-    public static Set<Set<Integer>> getKSizedSubSet(int set, int k) {
+    public static Set<Set<Integer>> getSubSets(int set, int k) {
         BitSet bitSet = intToBitSet(set);
+        if (k > bitSet.length()) {
+            throw new IllegalArgumentException("Subset size k can not be greater than set size");
+        }
         List<Integer> setASList = bitSet.stream().boxed().collect(Collectors.toList());
 
         ICombinatoricsVector<Integer> initialSet = Factory.createVector(setASList);
