@@ -37,4 +37,10 @@ public class BinarySetUtil {
                 .collect(Collectors.toSet());
     }
 
+    public static BitSet integerSetToBitSet(Set<Integer> integers) {
+        BitSet bitSet = new BitSet();
+        integers.forEach(bitSet::set);
+        return bitSet;
+    }
+
 }

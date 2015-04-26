@@ -75,4 +75,22 @@ public class BinarySetUtilTest {
         expected.add(set3);
         assertEquals(expected, result);
     }
+
+    @Test
+    public void integerSetToBitSetReturnsCorrectObject() {
+        // given
+        Set<Integer> integers = new HashSet<>(Arrays.asList(3, 5, 8, 15, 91));
+
+        // when
+        BitSet result = BinarySetUtil.integerSetToBitSet(integers);
+
+        // then
+        BitSet expected = new BitSet();
+        expected.set(3);
+        expected.set(5);
+        expected.set(8);
+        expected.set(15);
+        expected.set(91);
+        assertEquals(expected, result);
+    }
 }

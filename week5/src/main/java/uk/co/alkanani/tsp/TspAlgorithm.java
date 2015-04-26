@@ -26,7 +26,7 @@ public class TspAlgorithm {
             Set<Set<Integer>> subSets = BinarySetUtil.getSubSets(mainBitSet, m);
             subSets = subSets.stream().filter(s -> s.contains(0)).collect(Collectors.toSet());
             for (Set<Integer> subSet : subSets) {
-                BitSet subSetBitSet = BitSet.valueOf(setIntToArrayLong(subSet));
+                BitSet subSetBitSet = BinarySetUtil.integerSetToBitSet(subSet);
                 for (Integer j : subSet) {
                     if (j != 0) {
                         float min = Float.MAX_VALUE;
@@ -70,20 +70,4 @@ public class TspAlgorithm {
         }
     }
 
-    private int valueForIdx(int idx) {
-        return (int) Math.pow(2, idx + 1);
-    }
-
-    private int idxForValue(int value) {
-        return (int) (Math.log(value) / Math.log(2)) + 1;
-    }
-
-    private long[] setIntToArrayLong(Set<Integer> set) {
-        long[] result = new long[set.size()];
-        Iterator<Integer> setIterator = set.iterator();
-        for (int i=0; i<set.size(); i++) {
-            result[i] = (long) setIterator.next();
-        }
-        return result;
-    }
 }
