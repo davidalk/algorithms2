@@ -36,13 +36,17 @@ public class TspAlgorithm {
                             }
                             BitSet sMinusJ = (BitSet) subSetBitSet.clone();
                             sMinusJ.clear(j);
-                            float test = result[BinarySetUtil.bitSetToInt(sMinusJ)][k] + coordinates[k].getEuclideanDistance(coordinates[j]);
+                            float test = result[BinarySetUtil.bitSetToInt(sMinusJ)][k];
+                            if (test < Float.MAX_VALUE) {
+                                test += coordinates[k].getEuclideanDistance(coordinates[j]);
+                            }
 
 
                             if (test < min) {
                                 min = test;
                             }
                         }
+                        result[BinarySetUtil.bitSetToInt(subSetBitSet)][j] = min;
                     }
                 }
             }
@@ -60,7 +64,7 @@ public class TspAlgorithm {
 
     private void initialiseResults() {
         result = new float[mainBitSet+1][n];
-        result[1][0] = 0;
+        result[0][0] = 0;
         for (int i = 1; i < mainBitSet; i++) {
             result[i][0] = Float.MAX_VALUE;
         }
