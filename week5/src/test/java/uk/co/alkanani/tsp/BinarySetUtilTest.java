@@ -20,7 +20,7 @@ public class BinarySetUtilTest {
         bitSet.set(3);
 
         // when
-        BitSet result = BinarySetUtil.intToBitset(i);
+        BitSet result = BinarySetUtil.intToBitSet(i);
 
         // then
         assertEquals(bitSet, result);
