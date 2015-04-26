@@ -5,55 +5,50 @@ import uk.co.alkanani.domain.Coordinate;
 import java.util.BitSet;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class TspAlgorithm {
     private final Coordinate[] coordinates;
     private final int n;
     private float[][] result;
-    private int bitSet;
+    private final int mainBitSet;
 
     public TspAlgorithm(Coordinate[] coordinates) {
         this.coordinates = coordinates;
         n = coordinates.length;
-        bitSet = (int) Math.pow(2, n);
+        mainBitSet = (int) Math.pow(2, n) - 1;
     }
 
     public float execute() {
         initialiseResults();
-        int bitSetWithoutOne = bitSet >> 1;
 
         for (int m = 2; m <= n; m++) {
-            Set<Set<Integer>> subSets = BinarySetUtil.getSubSets(bitSetWithoutOne, m);
-            subSets.forEach(subSet -> {
+            Set<Set<Integer>> subSets = BinarySetUtil.getSubSets(mainBitSet, m);
+            for (Set<Integer> subSet : subSets) {
                 BitSet subSetBitSet = BitSet.valueOf(setIntToArrayLong(subSet));
-                subSet.forEach(j -> {
-                    float min = Float.MIN_VALUE;
-                    for (Integer k : subSet) {
-                        if (k.equals(j)) {
-                            continue;
-                        }
-                        BitSet sMinusJ = (BitSet) subSetBitSet.clone();
-                        sMinusJ.clear(idxForValue(j));
-                        float test;
-                        if (BinarySetUtil.bitSetToInt(sMinusJ) == 0  && k ==1) {
-                            test = coordinates[k-1].getEuclideanDistance(coordinates[j-1]);
-                        } else {
-                            test = result[BinarySetUtil.bitSetToInt(sMinusJ)][k-1] + coordinates[k-1].getEuclideanDistance(coordinates[j-1]);
-                        }
+                for (Integer j : subSet) {
+                    if (j != 0) {
+                        float min = Float.MAX_VALUE;
+                        for (Integer k : subSet) {
+                            if (k.equals(j)) {
+                                continue;
+                            }
+                            BitSet sMinusJ = (BitSet) subSetBitSet.clone();
+                            sMinusJ.clear(j);
+                            float test = result[BinarySetUtil.bitSetToInt(sMinusJ)][k] + coordinates[k].getEuclideanDistance(coordinates[j]);
 
-                        if (test<min) {
-                            min = test;
+
+                            if (test < min) {
+                                min = test;
+                            }
                         }
                     }
-                });
-            });
+                }
+            }
         }
 
         float answer = Float.MAX_VALUE;
-        for (int j=2; j<=n; j++) {
-            float test = result[bitSetWithoutOne-1][j] + coordinates[j-1].getEuclideanDistance(coordinates[0]);
+        for (int j=2; j<n; j++) {
+            float test = result[mainBitSet -1][j] + coordinates[j-1].getEuclideanDistance(coordinates[0]);
             if (test < answer) {
                 answer = test;
             }
@@ -62,9 +57,9 @@ public class TspAlgorithm {
     }
 
     private void initialiseResults() {
-        int bitSetWithoutOne = bitSet >> 1;
-        result = new float[bitSetWithoutOne][n];
-        for (int i = 0; i < bitSetWithoutOne; i++) {
+        result = new float[mainBitSet][n];
+        result[1][0] = 0;
+        for (int i = 1; i < mainBitSet; i++) {
             result[i][0] = Float.MAX_VALUE;
         }
     }
