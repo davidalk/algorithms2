@@ -50,7 +50,7 @@ public class BinarySetUtilTest {
     public void getSubSetsThrowsExceptionWhenSubsetSizeTooLarge() {
         // given
         int bitSet = 0b0010110;
-        int k = 6;
+        int k = 4;
 
         // when & then
         BinarySetUtil.getSubSets(bitSet, k);

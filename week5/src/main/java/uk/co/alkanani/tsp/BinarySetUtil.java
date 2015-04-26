@@ -22,7 +22,7 @@ public class BinarySetUtil {
 
     public static Set<Set<Integer>> getSubSets(int set, int k) {
         BitSet bitSet = intToBitSet(set);
-        if (k > bitSet.length()) {
+        if (k > bitSet.cardinality()) {
             throw new IllegalArgumentException("Subset size k can not be greater than set size");
         }
         List<Integer> setASList = bitSet.stream().boxed().collect(Collectors.toList());
