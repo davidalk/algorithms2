@@ -3,7 +3,6 @@ package uk.co.alkanani.tsp;
 import uk.co.alkanani.domain.Coordinate;
 
 import java.util.BitSet;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -64,8 +63,8 @@ public class TspAlgorithm {
 
     private void initialiseResults() {
         result = new float[mainBitSet+1][n];
-        result[0][0] = 0;
-        for (int i = 1; i < mainBitSet; i++) {
+        result[1][0] = 0;
+        for (int i = 2; i <=mainBitSet; i++) {
             result[i][0] = Float.MAX_VALUE;
         }
     }
