@@ -93,4 +93,28 @@ public class BinarySetUtilTest {
         expected.set(91);
         assertEquals(expected, result);
     }
+
+    @Test
+    public void nextIntWorksForSingleBit() {
+        // given
+        int i = 1;
+
+        // when
+        int result = BinarySetUtil.nextIntSameBitCount(i);
+
+        // then
+        assertEquals(2, result);
+    }
+
+    @Test
+    public void nextIntWorksForTwoBits() {
+        // given
+        int i = 3;
+
+        // when
+        int result = BinarySetUtil.nextIntSameBitCount(i);
+
+        // then
+        assertEquals(5, result);
+    }
 }

@@ -43,4 +43,10 @@ public class BinarySetUtil {
         return bitSet;
     }
 
+    public static int nextIntSameBitCount(int input) {
+        int i = (input & -input);
+        int j = input + i;
+        return (((j ^ input) >> 2) / i) | j;
+    }
+
 }
