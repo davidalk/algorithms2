@@ -5,13 +5,13 @@ import uk.co.alkanani.domain.Coordinate;
 import java.util.BitSet;
 import static uk.co.alkanani.tsp.BinarySetUtil.*;
 
-public class TspAlgorithm2 {
+public class TspAlgorithm {
     private final Coordinate[] coordinates;
     private final int n;
     private float[][] result;
     private final int mainBitSet;
 
-    public TspAlgorithm2(Coordinate[] coordinates) {
+    public TspAlgorithm(Coordinate[] coordinates) {
         this.coordinates = new Coordinate[coordinates.length +1];
         this.coordinates[0] = null;
         for (int i=0; i<coordinates.length; i++) {

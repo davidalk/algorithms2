@@ -15,7 +15,7 @@ public class TspAlgorithmTest {
     public void tspAlgorithmReturnsExpectedValue() {
         // given
         Coordinate[] coordinates = FileUtil.loadCoordinates("tsp-test.txt");
-        TspAlgorithm2 algorithm = new TspAlgorithm2(coordinates);
+        TspAlgorithm algorithm = new TspAlgorithm(coordinates);
 
         // when
         float result = algorithm.execute();
@@ -32,7 +32,7 @@ public class TspAlgorithmTest {
         coordinates[1] = new Coordinate(1, -4);
         coordinates[2] = new Coordinate(3, 1.5f);
         coordinates[3] = new Coordinate(3, -3.5f);
-        TspAlgorithm2 algorithm = new TspAlgorithm2(coordinates);
+        TspAlgorithm algorithm = new TspAlgorithm(coordinates);
 
         // when
         float result = algorithm.execute();
