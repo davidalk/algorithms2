@@ -25,6 +25,7 @@ public class TspAlgorithm2 {
         initialiseResults();
 
         for (int m=2; m<=n; m++) {
+            System.out.println("m: " + m);
             
             int currentBitSet = createStartingBitSet(m);
             int finishingBitSet = createFinishingBitSet(m, n);
