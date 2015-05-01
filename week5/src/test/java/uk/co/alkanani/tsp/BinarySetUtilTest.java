@@ -95,18 +95,6 @@ public class BinarySetUtilTest {
     }
 
     @Test
-    public void nextIntWorksForSingleBit() {
-        // given
-        int i = 1;
-
-        // when
-        int result = BinarySetUtil.nextIntSameBitCount(i);
-
-        // then
-        assertEquals(2, result);
-    }
-
-    @Test
     public void nextIntWorksForTwoBits() {
         // given
         int i = 3;
@@ -116,5 +104,42 @@ public class BinarySetUtilTest {
 
         // then
         assertEquals(5, result);
+    }
+
+    @Test
+    public void nextIntWorksForLargeBitSize() {
+        // given
+        int i = 39327;
+
+        // when
+        int result = BinarySetUtil.nextIntSameBitCount(i);
+
+        // then
+        assertEquals(39343, result);
+    }
+
+    @Test
+    public void createStartingBitSetGeneratesExpectedInt() {
+        // given
+        int size = 8;
+
+        // when
+        int result = BinarySetUtil.createStartingBitSet(size);
+
+        // then
+        assertEquals(255, result);
+    }
+
+    @Test
+    public void createFinishingBitSetGeneratesExpectedInt() {
+        // given
+        int size = 8;
+        int nodeCount = 25;
+
+        // when
+        int result = BinarySetUtil.createFinishingBitSet(size, nodeCount);
+
+        // then
+        assertEquals(33292289, result);
     }
 }

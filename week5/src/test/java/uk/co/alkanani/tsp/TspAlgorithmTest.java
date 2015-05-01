@@ -32,7 +32,7 @@ public class TspAlgorithmTest {
         coordinates[1] = new Coordinate(1, -4);
         coordinates[2] = new Coordinate(3, 1.5f);
         coordinates[3] = new Coordinate(3, -3.5f);
-        TspAlgorithm algorithm = new TspAlgorithm(coordinates);
+        TspAlgorithm2 algorithm = new TspAlgorithm2(coordinates);
 
         // when
         float result = algorithm.execute();

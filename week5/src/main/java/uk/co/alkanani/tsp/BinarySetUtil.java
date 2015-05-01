@@ -20,6 +20,7 @@ public class BinarySetUtil {
         return (int) b.toLongArray()[0];
     }
 
+    @Deprecated
     public static Set<Set<Integer>> getSubSets(int set, int k) {
         BitSet bitSet = intToBitSet(set);
         if (k > bitSet.cardinality()) {
@@ -37,6 +38,7 @@ public class BinarySetUtil {
                 .collect(Collectors.toSet());
     }
 
+    @Deprecated
     public static BitSet integerSetToBitSet(Set<Integer> integers) {
         BitSet bitSet = new BitSet();
         integers.forEach(bitSet::set);
@@ -46,7 +48,30 @@ public class BinarySetUtil {
     public static int nextIntSameBitCount(int input) {
         int i = (input & -input);
         int j = input + i;
-        return (((j ^ input) >> 2) / i) | j;
+        int result = (((j ^ input) >> 2) / i) | j;
+        if ((result & 1) == 1) {
+            return result;
+        } else {
+            return nextIntSameBitCount(result);
+        }
+    }
+
+    public static int createStartingBitSet(int size) {
+        BitSet bitSet = new BitSet();
+        for (int i=0; i<size; i++) {
+            bitSet.set(i);
+        }
+        return bitSetToInt(bitSet);
+    }
+
+    public static int createFinishingBitSet(int size, int nodeCount) {
+        int lastBit = nodeCount - 1;
+        BitSet bitSet = new BitSet();
+        for (int i=lastBit; i > (lastBit - size + 1); i--) {
+            bitSet.set(i);
+        }
+        bitSet.set(0);
+        return bitSetToInt(bitSet);
     }
 
 }
