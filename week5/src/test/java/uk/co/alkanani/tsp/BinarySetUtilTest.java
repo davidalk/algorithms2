@@ -144,6 +144,20 @@ public class BinarySetUtilTest {
     }
 
     @Test
+    public void createFinishingBitSetGeneratesAsExpectedForSizeSameAsNodeCount() {
+        // given
+        int size = 8;
+        int nodeCount = 8;
+
+        // when
+        int result = BinarySetUtil.createFinishingBitSet(size, nodeCount);
+
+        // then
+        int expected = 0b11111111;
+        assertEquals(expected, result);
+    }
+
+    @Test
     public void allBitsSetExceptOneGeneratesExpectedResult() {
         // given
         int inputBitSet = 0b00110011;

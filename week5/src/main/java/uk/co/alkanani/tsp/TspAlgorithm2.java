@@ -53,16 +53,25 @@ public class TspAlgorithm2 {
                             }
                         }
                     }
+                    // end find min
 
-
-                }
+                }  // end j loop
 
                 currentBitSet = BinarySetUtil.nextIntSameBitCount(currentBitSet);
-            }
+            }  // end subSet loop
 
+        }  // end m loop
+
+        float answer = Float.MAX_VALUE;
+        for (int j=2; j<=n; j++) {
+            float test = result[mainBitSet][j] +
+                    coordinates[j].getEuclideanDistance(coordinates[1]);
+            if (test < answer) {
+                test = answer;
+            }
         }
 
-        return 0;
+        return answer;
     }
 
     private void initialiseResults() {
