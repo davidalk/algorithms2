@@ -4,10 +4,7 @@ import org.paukov.combinatorics.Factory;
 import org.paukov.combinatorics.Generator;
 import org.paukov.combinatorics.ICombinatoricsVector;
 
-import java.util.BitSet;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class BinarySetUtil {
@@ -72,6 +69,14 @@ public class BinarySetUtil {
         }
         bitSet.set(0);
         return bitSetToInt(bitSet);
+    }
+
+    public static Set<Integer> allBitsExceptOne(int inputBitSet) {
+        BitSet bitSet = intToBitSet(inputBitSet);
+        bitSet.clear(0);
+        Set<Integer> result = new HashSet<>();
+        bitSet.stream().forEach(i -> result.add(i+1));
+        return result;
     }
 
 }

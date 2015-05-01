@@ -142,4 +142,17 @@ public class BinarySetUtilTest {
         // then
         assertEquals(33292289, result);
     }
+
+    @Test
+    public void allBitsSetExceptOneGeneratesExpectedResult() {
+        // given
+        int inputBitSet = 0b00110011;
+
+        // when
+        Set<Integer> result = BinarySetUtil.allBitsExceptOne(inputBitSet);
+
+        // then
+        Set<Integer> expected = new HashSet<>(Arrays.asList(2, 5, 6));
+        assertEquals(expected, result);
+    }
 }
