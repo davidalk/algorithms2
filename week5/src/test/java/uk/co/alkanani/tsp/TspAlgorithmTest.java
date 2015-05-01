@@ -15,13 +15,13 @@ public class TspAlgorithmTest {
     public void tspAlgorithmReturnsExpectedValue() {
         // given
         Coordinate[] coordinates = FileUtil.loadCoordinates("tsp-test.txt");
-        TspAlgorithm algorithm = new TspAlgorithm(coordinates);
+        TspAlgorithm2 algorithm = new TspAlgorithm2(coordinates);
 
         // when
         float result = algorithm.execute();
 
         // then
-        assertEquals(3.50116f, result, 0.2f);
+        assertEquals(3.50116f, result, 0.1f);
     }
 
     @Test
@@ -38,6 +38,6 @@ public class TspAlgorithmTest {
         float result = algorithm.execute();
 
         // then
-        assertEquals(14.2f, result, 0f);
+        assertEquals(14.2f, result, 0.1f);
     }
 }

@@ -3,7 +3,7 @@ package uk.co.alkanani.tsp;
 import uk.co.alkanani.domain.Coordinate;
 
 import java.util.BitSet;
-import java.util.Set;
+import static uk.co.alkanani.tsp.BinarySetUtil.*;
 
 public class TspAlgorithm2 {
     private final Coordinate[] coordinates;
@@ -26,24 +26,23 @@ public class TspAlgorithm2 {
 
         for (int m=2; m<=n; m++) {
             
-            int currentBitSet = BinarySetUtil.createStartingBitSet(m);
-            int finishingBitSet = BinarySetUtil.createFinishingBitSet(m, n);
+            int currentBitSet = createStartingBitSet(m);
+            int finishingBitSet = createFinishingBitSet(m, n);
             boolean runLastSet = false;
             while (!runLastSet) {
                 if (currentBitSet == finishingBitSet) {
                     runLastSet = true;
                 }
 
-                Set<Integer> subSet = BinarySetUtil.allBitsExceptOne(currentBitSet);
-                for (int j : subSet) {
+                for (int j : allBitsExceptOne(currentBitSet)) {
 
                     // find min
                     float min = Float.MAX_VALUE;
-                    for (int k : BinarySetUtil.allBits(currentBitSet)) {
+                    for (int k : allBits(currentBitSet)) {
                         if (k != j) {
-                            BitSet bitSet = BinarySetUtil.intToBitSet(currentBitSet);
+                            BitSet bitSet = intToBitSet(currentBitSet);
                             bitSet.clear(j-1);
-                            int subSetMinusJ = BinarySetUtil.bitSetToInt(bitSet);
+                            int subSetMinusJ = bitSetToInt(bitSet);
                             float test = result[subSetMinusJ][k];
                             if (test < Float.MAX_VALUE) {
                                 test += coordinates[k].getEuclideanDistance(coordinates[j]);
@@ -58,7 +57,7 @@ public class TspAlgorithm2 {
 
                 }  // end j loop
 
-                currentBitSet = BinarySetUtil.nextIntSameBitCount(currentBitSet);
+                currentBitSet = nextIntSameBitCount(currentBitSet);
             }  // end subSet loop
 
         }  // end m loop
@@ -68,7 +67,7 @@ public class TspAlgorithm2 {
             float test = result[mainBitSet][j] +
                     coordinates[j].getEuclideanDistance(coordinates[1]);
             if (test < answer) {
-                test = answer;
+                answer = test;
             }
         }
 

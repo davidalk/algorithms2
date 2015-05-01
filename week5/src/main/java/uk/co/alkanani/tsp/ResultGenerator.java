@@ -7,7 +7,7 @@ public class ResultGenerator {
 
     public static void main(String... args) {
         Coordinate[] coordinates = FileUtil.loadCoordinates("tsp.txt");
-        TspAlgorithm algorithm = new TspAlgorithm(coordinates);
+        TspAlgorithm2 algorithm = new TspAlgorithm2(coordinates);
 
         float result = algorithm.execute();
 
