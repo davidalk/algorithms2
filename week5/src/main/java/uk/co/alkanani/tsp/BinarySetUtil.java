@@ -75,6 +75,13 @@ public class BinarySetUtil {
         BitSet bitSet = intToBitSet(inputBitSet);
         bitSet.clear(0);
         Set<Integer> result = new HashSet<>();
+        bitSet.stream().forEach(i -> result.add(i + 1));
+        return result;
+    }
+
+    public static Set<Integer> allBits(int inputBitSet) {
+        BitSet bitSet = intToBitSet(inputBitSet);
+        Set<Integer> result = new HashSet<>();
         bitSet.stream().forEach(i -> result.add(i+1));
         return result;
     }

@@ -38,6 +38,6 @@ public class TspAlgorithmTest {
         float result = algorithm.execute();
 
         // then
-        assertEquals(14.2f, result, 0.1f);
+        assertEquals(14.2f, result, 0f);
     }
 }

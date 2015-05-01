@@ -38,9 +38,9 @@ public class TspAlgorithm2 {
                 for (int j : subSet) {
 
                     // find min
-                    float min = Float.MIN_VALUE;
-                    for (int k : subSet) {
-                        if (k!=j) {
+                    float min = Float.MAX_VALUE;
+                    for (int k : BinarySetUtil.allBits(currentBitSet)) {
+                        if (k != j) {
                             BitSet bitSet = BinarySetUtil.intToBitSet(currentBitSet);
                             bitSet.clear(j-1);
                             int subSetMinusJ = BinarySetUtil.bitSetToInt(bitSet);
@@ -54,6 +54,7 @@ public class TspAlgorithm2 {
                         }
                     }
                     // end find min
+                    result[currentBitSet][j] = min;
 
                 }  // end j loop
 
