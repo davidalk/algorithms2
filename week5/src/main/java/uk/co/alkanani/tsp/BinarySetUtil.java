@@ -24,28 +24,33 @@ public class BinarySetUtil {
     }
 
     public static int createStartingBitSet(int size) {
-        BitSet bitSet = new BitSet();
+        int result = 0;
         for (int i=0; i<size; i++) {
-            bitSet.set(i);
+            result = result << 1;
+            result += 1;
         }
-        return bitSetToInt(bitSet);
+        return result;
     }
 
     public static int createFinishingBitSet(int size, int nodeCount) {
-        int lastBit = nodeCount - 1;
-        BitSet bitSet = new BitSet();
-        for (int i=lastBit; i > (lastBit - size + 1); i--) {
-            bitSet.set(i);
+        int result = 0;
+        for (int i=0; i<size-1; i++) {
+            result = result << 1;
+            result += 1;
         }
-        bitSet.set(0);
-        return bitSetToInt(bitSet);
+
+        int zeroCount = nodeCount - size + 1;
+        for (int i=0; i<zeroCount; i++) {
+            result = result << 1;
+        }
+
+        result += 1;
+        return result;
     }
 
     public static Set<Integer> allBitsExceptOne(int inputBitSet) {
-        BitSet bitSet = intToBitSet(inputBitSet);
-        bitSet.clear(0);
-        Set<Integer> result = new HashSet<>();
-        bitSet.stream().forEach(i -> result.add(i + 1));
+        Set<Integer> result = allBits(inputBitSet);
+        result.remove(1);
         return result;
     }
 
