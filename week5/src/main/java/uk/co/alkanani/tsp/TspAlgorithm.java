@@ -13,10 +13,7 @@ public class TspAlgorithm {
 
     public TspAlgorithm(Coordinate[] coordinates) {
         this.coordinates = new Coordinate[coordinates.length +1];
-        this.coordinates[0] = null;
-        for (int i=0; i<coordinates.length; i++) {
-            this.coordinates[i+1] = coordinates[i];
-        }
+        System.arraycopy(coordinates, 0, this.coordinates, 1, coordinates.length);
         n = coordinates.length;
         mainBitSet = (int) Math.pow(2, n) - 1;
     }
@@ -53,8 +50,8 @@ public class TspAlgorithm {
                             }
                         }
                     }
-                    // end find min
                     result[currentBitSet][j] = min;
+                    // end find min
 
                 }  // end j loop
 
