@@ -21,7 +21,7 @@ public class TspAlgorithmTest {
         float result = algorithm.execute();
 
         // then
-        assertEquals(3.50116f, result, 0.1f);
+        assertEquals(3.5f, result, 0.1f);
     }
 
     @Test
