@@ -47,27 +47,36 @@ public class BinarySetUtilTest {
     }
 
     @Test
-    public void nextIntWorksForTwoBits() {
+    public void nextSetWorksForTwoBits() {
         // given
         int i = 3;
 
         // when
-        int result = BinarySetUtil.nextIntSameBitCount(i);
+        int result = BinarySetUtil.nextSetSameBitCountIncludingOne(i);
 
         // then
         assertEquals(5, result);
     }
 
     @Test
-    public void nextIntWorksForLargeBitSize() {
+    public void nextSetWorksForLargeBitSize() {
         // given
         int i = 39327;
 
         // when
-        int result = BinarySetUtil.nextIntSameBitCount(i);
+        int result = BinarySetUtil.nextSetSameBitCountIncludingOne(i);
 
         // then
         assertEquals(39343, result);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void nextSetShouldThrowExceptionWhenNoOneInInput() {
+        // given
+        int i = 0b00011010;
+
+        // when & then
+        int result = BinarySetUtil.nextSetSameBitCountIncludingOne(i);
     }
 
     @Test

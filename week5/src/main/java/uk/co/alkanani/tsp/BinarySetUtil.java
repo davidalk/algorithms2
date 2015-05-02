@@ -12,15 +12,21 @@ public class BinarySetUtil {
         return (int) b.toLongArray()[0];
     }
 
-    public static int nextIntSameBitCount(int input) {
+    public static int nextSetSameBitCountIncludingOne(int input) {
+        if ((input & 1) != 1) {
+            throw new IllegalArgumentException("Input set must contain one");
+        }
+        int result = input >> 1;
+        result = nextIntSameBitCount(result);
+        result = result << 1;
+        result += 1;
+        return result;
+    }
+
+    private static int nextIntSameBitCount(int input) {
         int i = (input & -input);
         int j = input + i;
-        int result = (((j ^ input) >> 2) / i) | j;
-        if ((result & 1) == 1) {
-            return result;
-        } else {
-            return nextIntSameBitCount(result);
-        }
+        return (((j ^ input) >> 2) / i) | j;
     }
 
     public static int createStartingBitSet(int size) {

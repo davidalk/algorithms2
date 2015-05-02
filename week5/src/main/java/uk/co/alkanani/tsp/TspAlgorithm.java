@@ -55,7 +55,7 @@ public class TspAlgorithm {
 
                 }  // end j loop
 
-                currentBitSet = nextIntSameBitCount(currentBitSet);
+                currentBitSet = nextSetSameBitCountIncludingOne(currentBitSet);
             }  // end subSet loop
 
         }  // end m loop
