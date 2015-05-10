@@ -18,12 +18,13 @@ public class TwoSatAlgorithm {
     public boolean execute() {
         Set<TwoSatClause> clauses = ClauseReducer.reduce(initialClauses);
         int n = clauses.size();
+        System.out.println("Clauses size: " + n);
         Set<Integer> argumentsInPlay = getArgumentsInPlay(clauses);
 
         for (int i=0; i<Math.log(n); i++) {
             randomiseArguments(argumentsInPlay);
 
-            for (int j=0; j<2 * Math.pow(2, n); j++) {
+            for (int j=0; j<2 * Math.pow(n, 2); j++) {
                 if (isSatisfied(clauses)) {
                     return true;
                 }
