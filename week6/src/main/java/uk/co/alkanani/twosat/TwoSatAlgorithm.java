@@ -18,10 +18,13 @@ public class TwoSatAlgorithm {
     public boolean execute() {
         Set<TwoSatClause> clauses = ClauseReducer.reduce(initialClauses);
         int n = clauses.size();
+        if (n == 0) {
+            return true;
+        }
         System.out.println("Clauses size: " + n);
         Set<Integer> argumentsInPlay = getArgumentsInPlay(clauses);
 
-        for (int i=0; i<Math.log(n); i++) {
+        for (int i=0; i<Math.log(n)/Math.log(2); i++) {
             randomiseArguments(argumentsInPlay);
 
             for (int j=0; j<2 * Math.pow(n, 2); j++) {
@@ -74,17 +77,15 @@ public class TwoSatAlgorithm {
             throw new IllegalStateException("Could not fund unsatisfied Clause");
         }
 
-        boolean arg1Negation = clause.v1 < 0 ? false : true;
         int arg1 = Math.abs(clause.v1);
-        boolean arg2Negation = clause.v2 < 0 ? false : true;
         int arg2 = Math.abs(clause.v2);
 
-        if (arguments[arg1] != arg1Negation) {
+        Random random = new Random();
+        boolean pick = random.nextBoolean();
+        if (pick) {
             arguments[arg1] = !arguments[arg1];
-        } else if(arguments[arg2] != arg2Negation) {
-            arguments[arg2] = !arguments[arg2];
         } else {
-            throw new IllegalStateException("Could not find argument to flip");
+            arguments[arg2] = !arguments[arg2];
         }
     }
 }
