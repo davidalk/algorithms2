@@ -12,7 +12,7 @@ public class TwoSatClauseTest {
     @Test
     public void isSatisfiedReturnsCorrectResult() {
         // given
-        TwoSatClause clause = new TwoSatClause(true, 3, false, 1);
+        TwoSatClause clause = new TwoSatClause(-3, 1);
         boolean[] arg1 = {false, true, true, true};
         boolean[] arg2 = {false, false, true, false};
         boolean[] arg3 = {false, true, false, false};

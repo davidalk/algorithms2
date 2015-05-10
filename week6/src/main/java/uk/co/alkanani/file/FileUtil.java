@@ -23,17 +23,8 @@ public class FileUtil {
             for (int i=1; i<=clauseCount; i++) {
                 int v1 = scanner.nextInt();
                 int v2 = scanner.nextInt();
-                boolean v1Negation = false;
-                boolean v2Negation = false;
-                if (v1 < 0) {
-                    v1Negation = true;
-                    v1 = Math.abs(v1);
-                }
-                if (v2 < 0) {
-                    v2Negation = true;
-                    v2 = Math.abs(v2);
-                }
-                clauses[i] = new TwoSatClause(v1Negation, v1, v2Negation, v2);
+
+                clauses[i] = new TwoSatClause(v1, v2);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
