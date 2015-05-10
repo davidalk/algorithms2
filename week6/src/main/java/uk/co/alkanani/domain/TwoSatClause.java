@@ -1,8 +1,8 @@
 package uk.co.alkanani.domain;
 
 public class TwoSatClause {
-    final int v1;
-    final int v2;
+    public final int v1;
+    public final int v2;
 
     public TwoSatClause(int v1, int v2) {
         this.v1 = v1;

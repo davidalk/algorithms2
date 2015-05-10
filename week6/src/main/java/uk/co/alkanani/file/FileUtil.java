@@ -18,9 +18,9 @@ public class FileUtil {
         try {
             scanner = new Scanner(file);
             clauseCount = scanner.nextInt();
-            clauses = new TwoSatClause[clauseCount + 1];
+            clauses = new TwoSatClause[clauseCount];
 
-            for (int i=1; i<=clauseCount; i++) {
+            for (int i=0; i<clauseCount; i++) {
                 int v1 = scanner.nextInt();
                 int v2 = scanner.nextInt();
 
